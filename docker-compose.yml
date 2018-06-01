@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  service:
+    build: service
+    environment:
+      - BUSINESS_HUB_API_KEY=<Put your SAP Business API Hub key here>
+    ports:
+      - "10010:10010"
+
+  dashboard:
+    build: dashboard
+    depends_on:
+      - service
+    ports:
+      - "80:80"
+    links:
+      - service

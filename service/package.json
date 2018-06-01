@@ -1,0 +1,86 @@
+{
+  "name": "concur-successfactor-aggregate-expense-management",
+  "email": "paul.todd@sap.com",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "private": true,
+  "description": "This is the API for the Concur & Successfactors Microservices implementation. The intention is to provide a set of highly focused API's to give data regarding aggregate expenses that can be consumed by applications. This is a test",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "swagger",
+    "SAP",
+    "Cloud_Foundry",
+    "SAPUI5"
+  ],
+  "dependencies": {
+    "async": "^2.6.0",
+    "connect": "^3.2.0",
+    "cors": "^2.8.4",
+    "got": "^8.3.0",
+    "js-yaml": "^3.3.0",
+    "swagger-tools": "0.10.1"
+  },
+  "engines": {
+    "node": "^6.11.3"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es6": true,
+      "node": true,
+      "amd": true
+    },
+    "rules": {
+      "object-curly-spacing": [
+        2,
+        "always"
+      ],
+      "strict": 0,
+      "quotes": [
+        2,
+        "single",
+        "avoid-escape"
+      ],
+      "semi": [
+        2,
+        "always"
+      ],
+      "space-before-function-paren": [
+        2,
+        "always"
+      ],
+      "keyword-spacing": [
+        2,
+        {
+          "before": true,
+          "after": true
+        }
+      ],
+      "space-infix-ops": 2,
+      "spaced-comment": [
+        "error",
+        "always",
+        {
+          "exceptions": [
+            "*"
+          ]
+        }
+      ],
+      "arrow-spacing": 2,
+      "no-console": 0,
+      "no-unused-vars": [
+        "error",
+        {
+          "args": "after-used"
+        }
+      ]
+    },
+    "globals": {
+      "module": false
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="sfsfconcur.sap.comSFSF-Concur-Expenses.controller.Users">
+	<Page title="{i18n>Users}" showNavButton="true" navButtonPress="onNavBack" showFooter="false" class="sapUiResponsiveContentPadding">
+		<content>
+		    <List noDataText="{i18n>NoUsers}" items="{expenses>/users}" >
+			    <ObjectListItem type="Active" title="{expenses>firstName} {expenses>lastName}" intro="{expenses>email}" >
+			        <attributes>
+			        	<ObjectAttribute text="{expenses>department} ({expenses>division})" />
+			        	<ObjectAttribute text="{expenses>location}" />
+			            <ObjectAttribute text="{expenses>city} ({expenses>country})" />
+			        </attributes>
+			    </ObjectListItem>
+		    </List>
+		</content>
+	</Page>
+</mvc:View>

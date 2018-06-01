@@ -1,0 +1,122 @@
+<mvc:View 
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns="sap.suite.ui.commons"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:m="sap.m"
+	xmlns:viz="sap.viz.ui5.controls"
+	xmlns:layout="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	controllerName="sfsfconcur.sap.comSFSF-Concur-Expenses.controller.Dashboard"
+	height="100%"
+	>
+	<m:Page class="sapUiResponsiveContentPadding" enableScrolling="false">
+		<m:customHeader>
+			<m:Bar>
+				<m:contentLeft>
+					<m:Image
+						src="icon/logo.png"
+						densityAware="false"
+						height="2rem"
+					/>
+				</m:contentLeft>
+				<m:contentMiddle>
+					<m:Text text = "{i18n>title}"></m:Text>	
+				</m:contentMiddle>
+				<m:contentRight>
+					<m:Button icon="sap-icon://customer" text="{i18n>username}" type="Transparent" />
+				</m:contentRight>
+			</m:Bar>
+		</m:customHeader>
+		<m:content>
+			<layout:FixFlex>
+				<layout:fixContent>
+				        <m:GenericTile
+				        	id="tile_departments"
+				        	class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiTinyMarginBottom tileLayout"
+							header="{i18n>departmentTileHeader}"
+							subheader="{i18n>departmentTileSubHeader}"
+							headerImage="sap-icon://org-chart"
+							press="selectDepartments">
+							<m:TileContent footer="{i18n>departmentTileFooter}">
+								<m:NumericContent value="{expenses>/totals/byDepartment}" />
+							</m:TileContent>
+				        </m:GenericTile>
+				        <m:GenericTile
+				        	id="tile_divisions"
+				        	class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiTinyMarginBottom tileLayout"
+							header="{i18n>divisionTileHeader}"
+							subheader="{i18n>divisionTileSubHeader}"
+							headerImage="sap-icon://company-view"
+							press="selectDivisions">
+							<m:TileContent footer="{i18n>divisionTileFooter}">
+								<m:NumericContent value="{expenses>/totals/byDivision}" />
+							</m:TileContent>
+				        </m:GenericTile>
+				        <m:GenericTile
+				        	id="tile_countries"
+				        	class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiTinyMarginBottom tileLayout"
+							header="{i18n>countryTileHeader}"
+							subheader="{i18n>countryTileSubHeader}"
+							headerImage="sap-icon://globe"
+							press="selectCountries">
+							<m:TileContent footer="{i18n>countryTileFooter}">
+								<m:NumericContent
+									value="{expenses>/totals/byCountry}"
+								/>
+							</m:TileContent>
+				        </m:GenericTile>
+				        <m:GenericTile
+				        	id="tile_locations"
+				        	class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiTinyMarginBottom tileLayout"
+							header="{i18n>locationTileHeader}"
+							subheader="{i18n>locationTileSubHeader}"
+							headerImage="sap-icon://building"
+							press="selectLocations">
+							<m:TileContent footer="{i18n>locationTileFooter}">
+								<m:NumericContent value="{expenses>/totals/byLocation}" />
+							</m:TileContent>
+				        </m:GenericTile>
+				</layout:fixContent>
+				<layout:flexContent  class="sapUiResponsiveContentPadding">
+					<ChartContainer 
+						id="chartContainer"
+						showFullScreen="true"
+						showPersonalization="false"
+						autoAdjustHeight="true"
+						personalizationPress="attachPersonalizationPress"
+						contentChange="attachContentChange"
+						title="">
+						<customIcons>
+							<core:Icon id="refresh" width="2em"></core:Icon>
+						</customIcons>						
+						<content>
+							<ChartContainerContent icon="sap-icon://line-chart" title="Line Chart">
+								<content>
+									<viz:VizFrame
+										id="chartContainerVizFrame"
+										height="100%"
+										width="100%"
+										uiConfig="{applicationSet:'fiori'}"
+									/>
+								</content>
+							</ChartContainerContent>
+							<ChartContainerContent icon="sap-icon://table-view" title="Table">
+								<content>
+									<m:Table id="chartContainerContentTable"/>
+								</content>
+							</ChartContainerContent>
+						</content>
+						<toolbar>
+							<m:OverflowToolbar id="appToolbar">
+								<m:Button id="btnUsers" icon="sap-icon://group" type="Transparent" press="onGotoUsers"></m:Button>
+								<m:Button id="btnReports" icon="sap-icon://travel-expense-report" type="Transparent" press="onGotoReports"></m:Button>
+								<m:ToolbarSpacer/>
+								<ChartContainerToolbarPlaceholder></ChartContainerToolbarPlaceholder>
+							</m:OverflowToolbar>
+					</toolbar>						
+					</ChartContainer>
+				</layout:flexContent>
+			</layout:FixFlex>
+		</m:content>
+	</m:Page>
+</mvc:View>

@@ -1,0 +1,24 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="sfsfconcur.sap.comSFSF-Concur-Expenses.controller.Main" displayBlock="true">
+	<App>
+		<pages>
+			<Page title="{i18n>title}" showSubHeader="false" showFooter="false">
+				<content>
+					<TileContainer xmlns="sap.m" id="__container1">
+				        <tiles>
+				        	<StandardTile xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" title="Timeline" info="Expense Timeline" icon="sap-icon://line-chart-time-axis" activeIcon="sap-icon://customer" infoState="Success" id="timeline_tile" removable="false" press="onExpensesTimelineClicked"/>
+				        	<StandardTile xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" title="Divisional Expenses" info="Expenses by Division" icon="sap-icon://group" activeIcon="sap-icon://customer" infoState="Success" id="division_tile" removable="false" press="onExpensesByDivisionClicked"/>
+				        	<StandardTile xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" title="Country Expenses" info="Expenses by country" icon="sap-icon://world" activeIcon="sap-icon://customer" infoState="Success" id="country_tile" removable="false" press="onExpensesByCountryClicked"/>
+				            <StandardTile xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" title="Regional Expenses" info="Expenses by Region" icon="sap-icon://example" activeIcon="sap-icon://customer" infoState="Success" id="region_tile" removable="false" press="onExpensesByRegionClicked"/>
+				            <StandardTile xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" title="Users" info="SuccessFactors Users" icon="sap-icon://customer" activeIcon="sap-icon://customer" infoState="Success" id="users_tile" removable="false" press="onUsersClicked"/>
+				            <StandardTile xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" title="Reports" info="Concur reports" icon="sap-icon://expense-report" activeIcon="sap-icon://customer" infoState="Success" id="reports_tile" removable="false" press="onReportsClicked"/>
+				            <StandardTile xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" title="Dashboard" info="Dashboard" icon="sap-icon://expense-report" activeIcon="sap-icon://customer" infoState="Success" id="dashboard_tile" removable="false" press="onDashboardClicked"/>
+				        </tiles>
+				    </TileContainer>
+				</content>
+			<headerContent>
+			    <Button width="100px" id="refresh_btn" icon="sap-icon://refresh" press="onRefreshClicked"/>
+			</headerContent>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

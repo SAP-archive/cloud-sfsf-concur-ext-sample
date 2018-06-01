@@ -1,0 +1,13 @@
+.sapDemokitSuiteChartContainerFixFlex {
+	position: absolute;
+}
+
+/* show the background as dark blue and not white */
+.sapMShellGlobalInnerBackground, .sapUiGlobalBackgroundColor {
+	background-color: transparent !important;
+}
+
+/* Make icons white */
+:not(.sapMBtnDisabled) .sapMBtnTransparent>.sapMBtnIcon {
+	color: white;
+}

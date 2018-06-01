@@ -1,0 +1,19 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="sfsfconcur.sap.comSFSF-Concur-Expenses.controller.Reports">
+	<Page title="{i18n>Reports}" showNavButton="true" navButtonPress="onNavBack" showFooter="false" class="sapUiResponsiveContentPadding">
+		<content>
+		    <List noDataText="{i18n>NoReports}" items="{expenses>/reports}" >
+			    <ObjectListItem type="Active" title="{expenses>name}" intro="{expenses>owner}" >
+			        <attributes>
+			            <ObjectAttribute text="{expenses>created}" />
+			        </attributes>
+			        <firstStatus>
+			        	<ObjectStatus text="{ path: 'expenses>approvalStatus', formatter: '.approvalStatus'}" state="{ path: 'expenses>approvalStatus', formatter: '.approvalStatusState'}" />
+			        </firstStatus>
+			        <secondStatus>
+			        	<ObjectStatus text="{ path: 'expenses>paymentStatus', formatter: '.paymentStatus'}" state="{ path: 'expenses>paymentStatus', formatter: '.paymentStatusState'}" />
+			        </secondStatus>
+			    </ObjectListItem>
+		    </List>
+		</content>
+	</Page>
+</mvc:View>

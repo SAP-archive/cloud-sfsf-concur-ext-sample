@@ -1,0 +1,463 @@
+---
+swagger: "2.0"
+info:
+  description: "This is the API for the Concur & Successfactors Microservices implementation.\
+    \ The intention is to provide a set of highly focused API's to give data regarding\
+    \ aggregate expenses that can be consumed by applications."
+  version: "0.0.1"
+  title: "Job Interview Expense Tracking"
+  contact:
+    email: "paul.todd@sap.com"
+    url: "https://www.sap.com"
+
+basePath: "/"
+tags:
+- name: "operations"
+  description: "System operations"
+- name: "users"
+  description: "Operations for expenses by user"
+- name: "locations"
+  description: "Operations for expenses by locations"
+- name: "divisions"
+  description: "Operations for expenses by division"
+- name: "departments"
+  description: "Operations for expenses by department"
+- name: "totals"
+  description: "Totals for reports and users"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /status:
+    get:
+      tags:
+      - "operations"
+      summary: "Check app status"
+      description: "Gets the system status."
+      operationId: "getStatus"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Status"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Operations"
+  /refresh:
+    post:
+      tags:
+      - "operations"
+      summary: "Refresh the Data"
+      description: "Refreshes the database by getting the data from Concur and from\
+        \ SuccessFactors and merging it to build an aggregate view of the expenses\
+        \ in the organization."
+      operationId: "reloadDB"
+      parameters: []
+      responses:
+        200:
+          description: "Null response"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Operations"
+  /users:
+    get:
+      tags:
+      - "users"
+      summary: "List users"
+      description: "returns the users from SuccessFactors that have expenses associated\
+        \ with them."
+      operationId: "getUsers"
+      parameters: []
+      responses:
+        204:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Users"
+  /reports:
+    get:
+      tags:
+      - "reports"
+      summary: "List reports for the users"
+      description: "returns the reports for the users that are stored in the system."
+      operationId: "getReports"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Report"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Reports"
+  /locations:
+    get:
+      tags:
+      - "locations"
+      summary: "List the expenses by locations"
+      description: "returns the expenses by locations"
+      operationId: "getExpensesByLocation"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ExpensesByLocation"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Locations"
+  /countries:
+    get:
+      tags:
+      - "countries"
+      summary: "List the expenses by countries"
+      description: "returns the expenses by countries"
+      operationId: "getExpensesByCountry"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ExpensesByCountry"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Countries"
+  /departments:
+    get:
+      tags:
+      - "departments"
+      summary: "List the expenses by department"
+      description: "returns the expenses by department"
+      operationId: "getExpensesByDepartment"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ExpensesByDepartment"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Departments"
+  /divisions:
+    get:
+      tags:
+      - "divisions"
+      summary: "List the expenses by division"
+      description: "returns the expenses by division"
+      operationId: "getExpensesByDivision"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ExpensesByDivision"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Divisions"
+  /totals:
+    get:
+      tags:
+      - "totals"
+      summary: "List the total number of aggregates"
+      description: "returns total number of different countries, locations, divisions\
+        \ & departments"
+      operationId: "getTotals"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Totals"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Totals"
+  /swagger:
+    x-swagger-pipe: "swagger_raw"
+definitions:
+  Error:
+    required:
+    - "message"
+    properties:
+      message:
+        type: "string"
+  Status:
+    required:
+    - "database"
+    - "lastsync"
+    - "services"
+    - "uptime"
+    properties:
+      services:
+        type: "string"
+        description: "The state of the services"
+      database:
+        type: "string"
+        description: "The current DB state. Can be 'uninitialized' if refresh has\
+          \ not been called and 'idle' if there is no ongoing db refresh or 'busy'\
+          \ if a refresh is ongoing"
+      uptime:
+        type: "number"
+        description: "The time in seconds sinc the server was started"
+      lastsync:
+        type: "string"
+        format: "dateTime"
+        description: "The ISO8601 date and time that the db was last synced"
+    example:
+      lastsync: "lastsync"
+      database: "database"
+      services: "services"
+      uptime: 0.8008
+  User:
+    type: "object"
+    properties:
+      userId:
+        type: "string"
+        description: "The SFSF user id"
+      firstName:
+        type: "string"
+        description: "The firstname of the user"
+      lastName:
+        type: "string"
+        description: "The last name of the user"
+      email:
+        type: "string"
+        description: "The email address of the user"
+      country:
+        type: "string"
+        description: "The country of the user"
+      department:
+        type: "string"
+        description: "The department the user belongs to"
+      division:
+        type: "string"
+        description: "The division the user belongs to"
+      city:
+        type: "string"
+        description: "The city the user belongs to"
+      location:
+        type: "string"
+        description: "The location of the user"
+      state:
+        type: "string"
+        description: "The state the user is resident in"
+    example:
+      division: "division"
+      firstName: "firstName"
+      lastName: "lastName"
+      country: "country"
+      city: "city"
+      location: "location"
+      state: "state"
+      department: "department"
+      userId: "userId"
+      email: "email"
+  Report:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "The Concur report Id"
+      userId:
+        type: "string"
+        description: "The Successfactors user id this concur user is mapped to"
+      loginId:
+        type: "string"
+        description: "The Concur login id this concur user is mapped to"
+      owner:
+        type: "string"
+        description: "The owner of the report"
+      name:
+        type: "string"
+        description: "The name of the report"
+      approvalStatus:
+        type: "string"
+        description: "The approval status of the report * A_AAFH - Report submission\
+          \ triggered an anomaly and fraud check * A_ACCO - Report is pending reviews\
+          \ * A_APPR - Report has been approved * A_EXTV - Report is pending external\
+          \ validation * A_FILE - Report has been submitted * A_NOTF - Report has\
+          \ not been submitted * A_PBDG - Report approval is pending Budget approval\
+          \ * A_PECO - Report approval is pending Cost object approval * A_PEND -\
+          \ Report is pending manager approval * A_PVAL - Report is pending prepayment\
+          \ validation * A_RESU - Report needs to be resubmitted * A_RHLD - Report\
+          \ submission is pending receipt images * A_TEXP - Report expired in approval\
+          \ queue\n"
+      paymentStatus:
+        type: "string"
+        description: "The payment status of the report * P_HOLD - Report payment is\
+          \ on hold * P_NOTP - Report has not been paid * P_PAID - Report has been\
+          \ paid * P_PAYC - Payment is confirmed. * P_PROC - Report is in process\
+          \ to be paid\n"
+      total:
+        type: "number"
+        format: "double"
+        description: "The total for the report"
+      totalClaimed:
+        type: "number"
+        format: "double"
+        description: "The total amount claimed"
+      totalApproved:
+        type: "number"
+        description: "The total amount approved"
+      currencyCode:
+        type: "string"
+        description: "The currency code the values in the report are presented in"
+      created:
+        type: "string"
+        format: "dateTime"
+        description: "The ISO8601 date and time that the db was last synced"
+    example:
+      owner: "owner"
+      approvalStatus: "approvalStatus"
+      total: 123.45
+      totalApproved: 43.23
+      loginId: "loginId"
+      totalClaimed: "78,43"
+      created: "created"
+      name: "name"
+      id: "id"
+      userId: "userId"
+      currencyCode: "currencyCode"
+      paymentStatus: "paymentStatus"
+  ExpensesByLocation:
+    type: "object"
+    required:
+    - "location"
+    - "total"
+    properties:
+      location:
+        type: "string"
+        description: "The location name"
+      total:
+        type: "number"
+        format: "double"
+        description: "The total for the locations"
+    description: "The expense total for the locations."
+    example:
+      total: 101.23
+      location: "location"
+  ExpensesByCountry:
+    type: "object"
+    required:
+    - "country"
+    - "total"
+    properties:
+      country:
+        type: "string"
+        description: "The country name"
+      total:
+        type: "number"
+        format: "double"
+        description: "The total for the country"
+    description: "The expense total for the countries."
+    example:
+      country: "country"
+      total: 432.12
+  ExpensesByDivision:
+    type: "object"
+    required:
+    - "division"
+    - "total"
+    properties:
+      division:
+        type: "string"
+        description: "The division name"
+      total:
+        type: "number"
+        format: "double"
+        description: "The total for the division"
+    description: "The expense total for the divisions."
+    example:
+      division: "division"
+      total: 45.12
+  ExpensesByDepartment:
+    type: "object"
+    required:
+    - "department"
+    - "total"
+    properties:
+      department:
+        type: "string"
+        description: "The department name"
+      total:
+        type: "number"
+        format: "double"
+        description: "The total for the department"
+    description: "The expense total for the departments."
+    example:
+      total: 87.12
+      department: "department"
+  Totals:
+    type: "object"
+    required:
+    - "byCountry"
+    - "byDepartment"
+    - "byDivision"
+    - "byLocation"
+    - "grossTotal"
+    properties:
+      byCountry:
+        type: "number"
+        description: "The total different countries"
+      byLocation:
+        type: "number"
+        description: "The total different locations"
+      byDivision:
+        type: "number"
+        description: "The total different divisions"
+      byDepartment:
+        type: "number"
+        description: "The total different departments"
+      grossTotal:
+        type: "number"
+        description: "the total expenses"
+    description: "The totals for the expenses"
+    example:
+      byDepartment: 312.21
+      byLocation: 783.82
+      grossTotal: 1230.89
+      byDivision: 54.32
+      byCountry: 901.17

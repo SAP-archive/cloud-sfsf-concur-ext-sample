@@ -1,0 +1,132 @@
+{
+	"_version": "1.5.0",
+	"sap.app": {
+		"id": "sfsfconcur.sap.comSFSF-Concur-Expenses",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "sfsfconcur.sap.comSFSF-Concur-Expenses.view.App",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sfsfconcur.sap.comSFSF-Concur-Expenses.i18n.i18n"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "sfsfconcur.sap.comSFSF-Concur-Expenses.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"transition": "slide"
+			},
+			"routes": [
+				{
+					"pattern": "home",
+					"name": "appHome",
+					"target": "home"
+				},
+				{
+					"pattern": "users",
+					"name": "users",
+					"target": "users"
+				},
+				{
+					"pattern": "reports",
+					"name": "reports",
+					"target": "reports"
+				},
+				{
+					"pattern": "",
+					"name": "dashboard",
+					"target": "dashboard"
+				}
+			],
+			"targets": {
+				"home": {
+					"viewName": "Main",
+					"viewLevel": 2
+				},
+				"users": {
+					"viewName": "Users",
+					"viewLevel": 2
+				},
+				"reports": {
+					"viewName": "Reports",
+					"viewLevel": 2
+				},
+				"dashboard": {
+					"viewName": "Dashboard",
+					"viewLevel": 1
+				},
+				"notfound": {
+					"viewName": "NotFound",
+					"transition": "show"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}

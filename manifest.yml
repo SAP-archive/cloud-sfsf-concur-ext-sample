@@ -1,0 +1,17 @@
+applications:
+- name: concur-sfsf-services
+  instances: 1
+  memory: 192M
+  disk_quota: 256M
+  path: service
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  stack: cflinuxfs2
+  env:
+    BUSINESS_HUB_API_KEY: <your API Hub Licence Key here>
+
+- name: concur-sfsf-web
+  instances: 1
+  memory: 16M
+  disk_quota: 16M
+  path:      dashboard
+  buildpack: https://github.com/cloudfoundry-community/staticfile-buildpack.git
