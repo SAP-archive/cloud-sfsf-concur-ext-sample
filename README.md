@@ -85,7 +85,7 @@ example: https://i12345-concur-sfsf-services.cfapps.us10.hana.ondemand.com
 
 To determine your region, please select from the following table.
   
- servers       | region            
+ server       | region            
  ------------- | --------- 
 | US East (VA) running on AWS      | us10 | 
 | US West (CA) running on Azure      | us20 |   
