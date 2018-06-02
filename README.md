@@ -79,9 +79,21 @@ applications:
 The final change required is to ensure the UI application points to the correct service instance. Open the ExpensesModel.js file in the Dashboard/webapp/model folder and set the CLOUD_FOUNDRY_API_ENDPOINT to point to the service instance. This will be the application name for the service together with the URL for the apps landscape landscape
 
 ```
-https://<I/D/S/C/P id>-concur-sfsf-services.cfapps.us10.hana.ondemand.com
+https://<I/D/S/C/P id>-concur-sfsf-services.cfapps.<region>.hana.ondemand.com
+example: https://i12345-concur-sfsf-services.cfapps.us10.hana.ondemand.com
 ``` 
 
+To determine your region, please select from the following table.
+  
+ servers       | region            
+ ------------- | --------- 
+| US East (VA) running on AWS      | us10 | 
+| US West (CA) running on Azure      | us20 |   
+| Europe (Frankfurt) running on AWS | eu10 |   
+
+For the complete list of regions, please reference the [help doc](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/350356d1dc314d3199dca15bd2ab9b0e.html). 
+  
+  
 *tip*
 It is often easier to deploy the project and then open the project in the SAP Cloud Platform cockpit and obtain the service URL from there, rather than trying to work out the correct value by hand.
 
@@ -97,7 +109,7 @@ and this will push the two applications to the cloud foundry space and start the
 The web application endpoint for the application will typically be in the form
 
 ```
-https://<I/D/S/C/P id>-concur-sfsf-web.cfapps.us10.hana.ondemand.com
+https://<I/D/S/C/P id>-concur-sfsf-web.cfapps.<region>.hana.ondemand.com
 ```
 
 As before this can be obtained from the application details in the SAP Cloud Platform cloud cockpit for the space.
@@ -105,14 +117,14 @@ As before this can be obtained from the application details in the SAP Cloud Pla
 Navigate to the url in a browser to verify that the application has successfully deployed and is talking to the service
 
 ```
-https://<I/D/S/C/P id>-concur-sfsf-web.cfapps.us10.hana.ondemand.com/webapp
+https://<I/D/S/C/P id>-concur-sfsf-web.cfapps.<region>.hana.ondemand.com/webapp
 ```
 
 To verify the service is functioning correctly the service can be called from a REST client such as postman or from the command line using  a tool such as curl which is shown below
 Thanks to this [question](https://stackoverflow.com/questions/27238411/curl-output-to-display-in-the-readable-json-format-in-unix-shell-script) on Stackoverflow the resulting output can be formatted to be clearer using json_pp.
 
 ```
-curl https://<I/D/S/C/P id>-concur-sfsf-services.cfapps.us10.hana.ondemand.com/status | json_pp
+curl https://<I/D/S/C/P id>-concur-sfsf-services.cfapps.<region>.hana.ondemand.com/status | json_pp
 ``` 
 
 and the resulting response will be shown
