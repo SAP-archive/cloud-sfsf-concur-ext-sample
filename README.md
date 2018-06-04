@@ -1,19 +1,19 @@
-# Build a Recruitment & Travel Expense Management Dashboard
+# Build a Recruitment & Travel Expense Management Dashboard on SAP Cloud Platform
 
-This application focuses on utilizing the data from both SuccessFactors (SFSF) for HR management and Concur for Expense Management. The data is joined together to provide an easy to consume summery that is created in the service and shown in a UI5 Analytic Page dashboard.
+This application running on SAP Cloud Platform focuses on utilizing the data from both SAP SuccessFactors (SFSF) for HR management and SAP Concur for Expense Management. The data is joined together to provide an easy to consume summary that is created in the service and shown in a SAPUI5 Analytic Page dashboard.
 
-This application itself is composed of two projects. The first project is the API service that provides the aggregation of the SFSF and Concur data in a consumable API to callers. The second is the actual UI itself. This is used to show the data retrieved from the service in a dashboard.
+This application itself is composed of two projects. The first project is the API service that provides the aggregation of the SFSF and Concur data in a consumable API to callers by means of the SAP API Business Hub. The second is the actual UI itself based on a web application built with SAPUI5, SAP's development toolkit for HTML5. This is used to show the data retrieved from the service in a dashboard.
 
-The service is written in NodeJS and adopts an API-First approach to project development. This is accomplished through the use of OpenAPI, formerly called Swagger. The API is managed through node-swagger and implementations of the various REST services defined in the swagger API file have been provided.
+The service is written in node.js and adopts an API-first approach to project development. This is accomplished through the use of OpenAPI, formerly called Swagger. The API is managed through node-swagger and implementations of the various REST services defined in the swagger API file have been provided.
 
-When it comes to the UI that consumes the service: The UI has been written using SAPUI5 and it uses the classic SAP Fiori look and feel for the dashboard. The UI5 application is hosted using the staticfiles buildpack on cloud foundry and is delivered using an NGinx server.
+When it comes to the UI that consumes the service: The UI has been written using SAPUI5 and it uses the classic SAP Fiori look and feel for the dashboard. The SAPUI5 application is hosted using the staticfiles buildpack on Cloud Foundry and is delivered using an NGinx server.
 
 ## Source Code
-All the source code has been supplied. The code is written in Javascript using NodeJS for the service and SAPUI5 for the client application.
+All the source code has been supplied. The code is written in JavaScript using node.js for the service and SAPUI5 for the client application.
 
 The source code to the API service implementation can be found in the service folder.
 
-The source code to the SAP UI5 application can be found in the dashboard folder. The SAPUI5 project uses SAP UI5 that is hosted via the SAP CDN and so does not need to be included with the project source code.
+The source code to the SAPUI5 application can be found in the dashboard folder. The SAPUI5 project uses SAPUI5 that is hosted via the SAP CDN and so does not need to be included with the project source code.
 
 
 # Business Case Story
@@ -29,7 +29,7 @@ The following prerequisites are required in order to create the applications and
 This will enable the trial for Cloud Foundry which is valid for 90 days.
 
 
-- *API Hub Licence Key*
+- *API Hub License Key*
 Go over to https://api.sap.com and create an account of login. Once logged in obtain a API key that will be used to access the API's from within the service via REST HTTP calls.  
 
   To learn how to get the API key see the tutorial on the tutorial navigator - https://www.sap.com/developer/tutorials/hcp-abh-getting-started.html
@@ -40,9 +40,7 @@ To download the node runtime navigate over to https://nodejs.org/en/ then downlo
 
 
 - *cf 6.34.1*
-The cloud foundry commmand line application. This tool will be used to install and manage the applications on the cloud foundry landscape. This tool can be downloaded from the cloud foundry website at https://docs.cloudfoundry.org/cf-cli/install-go-cli.html
-
-
+The Cloud Foundry command line application. This tool will be used to install and manage the applications on the cloud foundry landscape. This tool can be downloaded from the cloud foundry website at https://docs.cloudfoundry.org/cf-cli/install-go-cli.html
 
 # Setup
 
@@ -66,7 +64,7 @@ applications:
   buildpack: https://github.com/cloudfoundry/nodejs-buildpack
   stack: cflinuxfs2
   env:
-    BUSINESS_HUB_API_KEY: <Your API Hub Key Here>
+    BUSINESS_HUB_API_KEY: <Your SAP API Business Hub key here>
 
 - name: <I/D/S/C/P id>-concur-sfsf-web
   instances: 1
@@ -103,7 +101,7 @@ Once the above two changes have been implemented the application can be deployed
 cf push
 ```
 
-and this will push the two applications to the cloud foundry space and start them. Once the applications have deployed, open the brower and navigate to the service end point and add a "/webapp" to the path
+and this will push the two applications to the cloud foundry space and start them. Once the applications have deployed, open the browser and navigate to the service end point and add a "/webapp" to the path
 
 
 The web application endpoint for the application will typically be in the form
@@ -146,13 +144,13 @@ and the resulting response will be shown
  
 # Service Implementation
 
-The implementation of the service is the core to this project and is an integral part to understanding how to mashup API's from separate SAP properties through the SAP API Hub. Although we are using the SAP API Hub this could also easily be re-purposed to tak directly to the the actual servers as the API Hub provides the API's that are identical to the real API's provide in the relevant properties API's.
+The implementation of the service is the core to this project and is an integral part to understanding how to mashup API's from separate SAP properties through the SAP API Business Hub. Although we are using the SAP API Business Hub this could also easily be re-purposed to talk directly to the the actual servers as the API Hub provides the API's that are identical to the real API's provide in the relevant properties API's.
 
-To learn more about the Concur API's access them at the Concur Developer Portal
+To learn more about the SAP Concur API's access them at the Concur Developer Portal
 
 [https://developer.concur.com/api-reference/](https://developer.concur.com/api-reference/)
 
-To learn move about the SuccessFactors API's access them at the OData API Reference document
+To learn move about the SAP SuccessFactors API's access them at the OData API Reference document
 
 [SF_HCM_OData_API_REF_en.pdf](https://help.sap.com/doc/74597e67f54d4f448252bad4c2b601c9/1711/en-US/SF_HCM_OData_API_REF_en.pdf)
 
@@ -164,7 +162,7 @@ To learn move about the SuccessFactors API's access them at the OData API Refere
 
 The implementation of the dashboard used to consume the service is based on the [Fiori Analytical List Page](https://experience.sap.com/fiori-design-web/analytical-list-page/). However due to the complexity of implementing this coupled with the large amount of required code and setup it was decided to create a lighter version that better illustrated the core concepts of what was to be shown.
 
-The key files to examine the project are the Expenses model in the model folder and of course the Dashboard.xml and the Dashboard.controller.js files as these shpw how the model is integrated into the UI through binding. They also show a text book implementation of how to consume JSON data from a microservice within SAP UI5.
+The key files to examine the project are the Expenses model in the model folder and of course the Dashboard.xml and the Dashboard.controller.js files as these shpw how the model is integrated into the UI through binding. They also show a text book implementation of how to consume JSON data from a microservice within SAPUI5.
 
 [Click here to access a more detailed deep dive into the implementation of the dashboard](/pages/dashboard-implementation.md)
    
