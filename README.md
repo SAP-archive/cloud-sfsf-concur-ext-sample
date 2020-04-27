@@ -1,4 +1,4 @@
-# Build a Recruitment & Travel Expense Management Dashboard on SAP Cloud Platform
+# Build a Recruitment and Travel Expense Management Dashboard on SAP Cloud Platform
 
 This application running on SAP Cloud Platform focuses on utilizing the data from both SAP SuccessFactors (SFSF) for HR management and SAP Concur for Expense Management. The data is joined together to provide an easy to consume summary that is created in the service and shown in a SAPUI5 Analytic Page dashboard.
 
@@ -178,11 +178,5 @@ Authors
 Copyright and License
 ---------------------
 
-Copyright (c) 2013-2018 SAP SE
-
-Except as provided below, this software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License.You may obtain a copy of the License at:
-
-[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
-
+Copyright (c) 2013 SAP SE or an SAP affiliate company. All rights reserved. 
+This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.
