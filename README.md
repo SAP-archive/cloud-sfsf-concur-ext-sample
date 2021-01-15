@@ -1,3 +1,8 @@
+![](https://img.shields.io/badge/STATUS-NOT%20CURRENTLY%20MAINTAINED-red.svg?longCache=true&style=flat)
+
+# Important Notice
+This public repository is read-only and no longer maintained.
+
 # Build a Recruitment and Travel Expense Management Dashboard on SAP Cloud Platform
 
 This application running on SAP Cloud Platform focuses on utilizing the data from both SAP SuccessFactors (SFSF) for HR management and SAP Concur for Expense Management. The data is joined together to provide an easy to consume summary that is created in the service and shown in a SAPUI5 Analytic Page dashboard.
